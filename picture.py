@@ -1,12 +1,12 @@
 import numpy as np
 from PIL import Image
-imgs = Image.open("img/stone.jpeg")
+imgs = Image.open("img/testveel.jpeg")
 #print imgs.size
 #print im.size
 #im = imgs.resize((200, 300), Image.ANTIALIAS)
 #im.show()
 arr = np.array(imgs)
 #print np.size(arr)
-img = Image.fromarray(arr[1300:1600,2200:2500], 'RGB')
+img = Image.fromarray(arr[800:2200,1500:3000], 'RGB')
 img.show()
-img.save('img/stone.jpeg')
+img.save('img/testveel.jpeg')
