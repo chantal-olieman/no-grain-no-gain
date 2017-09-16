@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import numpy as np
 from PIL import Image
-from sklearn import svm
 import matplotlib.pyplot as plt
 
 def makearray(imname, x, y):
@@ -21,8 +20,6 @@ def maketxtfile(imname, x, y):
 	#instead of a matrix make a vector
 	arr2d = arr.reshape(-1,arr.shape[2])
 	#Already halve x and y
-	return arr2d
-
 	y = y/2
 	x = x/2 
 	#fill the rest of the array
@@ -40,7 +37,7 @@ def maketxtfile(imname, x, y):
 	return arr2d
 
 def createXY(types):
-	X = maketxtfile(types[0], (x/2) ,(y/2))
+	X = maketxtfile(types[0], x ,y)
 	m, n = X.shape
 	Y = 0 * np.ones((m,1),int)
 	for i in range(1, len(types)):
@@ -56,15 +53,15 @@ def createXY(types):
 def classify(clf, Z, n):
 	result = 0 * np.ones((n,1))
 	for i in range(len(Z)):
-    		label = clf.predict(Z[i].reshape(1,-1))
+    		label = clf.predict(Z[i])
 		label = int(round(label))
 		result[label] = result[label] + 1 
 	return result/len(Z)
 
 def plot(results, labels):
 	sizes = results*100
-	colors = ['red', 'gold', 'lightskyblue', 'yellowgreen', 'purple', 'blue']
-	explode = (0, 0, 0, 0, 0, 0)  # explode a slice if required
+	colors = ['yellowgreen', 'gold', 'lightskyblue']
+	explode = (0, 0, 0)  # explode a slice if required
 
 	plt.pie(sizes, explode=explode, labels=labels, colors=colors,
         	autopct='%1.1f%%', shadow=True)
@@ -81,9 +78,9 @@ def plot(results, labels):
 	plt.show()
 
 
-types = ["stro", "red", "green", "graan", "stone", "black"] 
-x = 16
-y = 32
+types = ["graan2", "red2", "stone2", ] 
+x = 64
+y = 64
 
 
 #read in data 
@@ -91,23 +88,22 @@ y = 32
 #preprocess Y
 Y = Y.ravel()
 
-# Fit estimators
-from sklearn.neighbors import KNeighborsClassifier
 
+#train model
+from sklearn import svm
 
+clf = svm.LinearSVC()
+clf = clf.fit(X, Y)
 
 #read in test file
 x = 320
-y = 160
-Z = makearray("conta", x, y)
-labels = 'Straw', 'Red kidney beans', 'Pumpkin seeds', 'Grain', 'Stones', 'Black lentils'
-
-
-#train model
-clf = KNeighborsClassifier( n_neighbors=5, weights='distance')
-clf.fit(X, Y)
+y = 320
+Z = makearray("testveel2", x, y)
 
 #classify test data
 results = classify(clf, Z, len(types))
+labels = 'Grain', 'Red Beans', 'Stones'
+
+#plot test data
 plot(results, labels)
 
