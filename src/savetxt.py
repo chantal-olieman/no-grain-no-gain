@@ -26,7 +26,7 @@ def maketxtfile(imname, x, y):
 	print arr2d.shape
 	#save the file 
 	filename = "../data/%s.txt" % imname
-	np.savetxt(filename, arr2d,fmt='% 4d' ,delimiter=',')
+	np.savetxt(filename, arr2d,fmt='% 4d' ,delimiter=' ')
 
 x = 32
 y = 16
