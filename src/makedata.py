@@ -60,8 +60,8 @@ def classify(clf, Z, n):
 
 def plot(results, labels):
 	sizes = results*100
-	colors = ['yellowgreen', 'gold', 'lightskyblue']
-	explode = (0, 0, 0)  # explode a slice if required
+	colors = ['yellowgreen', 'gold', 'lightskyblue', 'red', 'purple', 'blue', 'gray']
+	explode = (0, 0, 0, 0, 0, 0, 0)  # explode a slice if required
 
 	plt.pie(sizes, explode=explode, labels=labels, colors=colors,
         	autopct='%1.1f%%', shadow=True)
@@ -78,8 +78,8 @@ def plot(results, labels):
 	plt.show()
 
 
-types = ["graan2", "red2", "stone2"] 
-x = 64
+types = ["graan", "red", "green", "stro", "stone", "black", "dried"] 
+x = 128
 y = 64
 
 
@@ -94,13 +94,13 @@ clf = svm.LinearSVC()
 clf.fit(X, Y) 
 
 #read in test file
-x = 320
+x = 160
 y = 320
-Z = makearray("testveel2", x, y)
+Z = makearray("conta", x, y)
 
 #classify test data
 results = classify(clf, Z, len(types))
-labels = 'Grain', 'Red Beans', 'Stones'
+labels = 'Grain', 'Red Beans', 'Green', 'Stro', 'Stone', 'Black', 'Dried'
 
 plot(results, labels)
 
