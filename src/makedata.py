@@ -2,6 +2,7 @@
 import numpy as np
 from PIL import Image
 from sklearn import svm
+import matplotlib.pyplot as plt
 
 def makearray(imname, x, y):
 	filename = "../img/%s.jpeg" % imname
@@ -57,10 +58,29 @@ def classify(clf, Z, n):
 		result[label] = result[label] + 1 
 	return result/len(Z)
 
+def plot(results, labels):
+	sizes = results*100
+	colors = ['yellowgreen', 'gold', 'lightskyblue']
+	explode = (0, 0, 0)  # explode a slice if required
 
-types = ["graan", "red", "stone"] 
-x = 32
-y = 16
+	plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+        	autopct='%1.1f%%', shadow=True)
+        
+	#draw a circle at the center of pie to make it look like a donut
+	centre_circle = plt.Circle((0,0),0.40,color='black', fc='white',linewidth=0.75)
+	fig = plt.gcf()
+	fig.gca().add_artist(centre_circle)
+	outside = plt.Circle((0,0),1.0,color='black', linewidth=0.75, fill=False)
+	fig.gca().add_artist(outside)
+
+	# Set aspect ratio to be equal so that pie is drawn as a circle.
+	plt.axis('equal')
+	plt.show()
+
+
+types = ["graan2", "red2", "stone2"] 
+x = 64
+y = 64
 
 
 #read in data 
@@ -74,26 +94,13 @@ clf = svm.LinearSVC()
 clf.fit(X, Y) 
 
 #read in test file
-x = 32
-y = 16
-Z = makearray("pic", x, y)
+x = 320
+y = 320
+Z = makearray("testveel2", x, y)
 
 #classify test data
 results = classify(clf, Z, len(types))
-
-import matplotlib.pyplot as plt
-
-# Pie chart, where the slices will be ordered and plotted counter-clockwise:
 labels = 'Grain', 'Red Beans', 'Stones'
-sizes = results*100
-explode = (0, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
 
-fig1, ax1 = plt.subplots()
-ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-        shadow=True, startangle=90)
-ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-
-plt.show()
-
-
+plot(results, labels)
 
