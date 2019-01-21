@@ -16,9 +16,9 @@ We implemented a simple classification model that classifies every part of the p
 
 ## Results
 
-![result1](images/results1)
-![result2](images/results2)
-![result3](images/results3)
-![result4](images/results4)
-![result5](images/results5)
-![result6](images/results6)
+![result1](images/results1.png)
+![result2](images/results2.png)
+![result3](images/results3.png)
+![result4](images/results4.png)
+![result5](images/results5.png)
+![result6](images/results6.png)
