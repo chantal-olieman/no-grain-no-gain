@@ -14,4 +14,11 @@ For Hack Zurich 2017 we worked on an image recognition project that detects unwa
  
 We implemented a simple classification model that classifies every part of the picture into one of the provided categories. We trained the model on pictures of these materials, both taken our-self and found online. After classifying all parts of the picture, the predicted materials are combined and we use that to calculate the presence of every individual material in the picture. 
 
-## Results 
+## Results
+
+![result1](images/results1)
+![result2](images/results2)
+![result3](images/results3)
+![result4](images/results4)
+![result5](images/results5)
+![result6](images/results6)
