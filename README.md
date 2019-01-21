@@ -1,4 +1,3 @@
-# Files
 
 # No grain no gain!
 
